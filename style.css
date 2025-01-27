@@ -1,8 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Cabin:wght@400;500;600;700&display=swap');
 
 body {
-    font-family: 'Cabin';
-    background-color: #758190;
+    font-family: 'Cabin', sans-serif;
+    background-color: #f0f4f8; /* Lighter background */
 }
 
 #tentacles {
@@ -19,17 +19,27 @@ body {
     margin-top: -10px;
 }
 
+/* Add flexbox properties to stats-container */
 .stats-container {
-    display: flex;
+    display: flex; /* Enables flexbox */
+    align-items: center; /* Aligns items vertically */
+    justify-content: space-between; /* Adjusts spacing between items */
 }
 
+/* CSS rule for stats-card */
 .stats-card {
     background-color: #a8b0bc;
     border-radius: 7px;
-    padding: 1%;
+    padding: 2%;
     margin: 1%;
-    width: 100%;
+    width: 30%;
     text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stats-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 0 15px #00b4d8;
 }
 
 #num-contributions, #total-raised, #num-games {
@@ -50,16 +60,20 @@ body {
 
 .game-card {
     background-color: #FFFFFF;
-    padding: 1%;
+    padding: 1.5%;
     margin: 1%;
     width: 300px;
     text-align: center;
     border-radius: 7px;
+    border: 1px solid #ddd;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
 .game-card:hover {
     cursor: pointer;
-    box-shadow: 0 0 30px lightblue;
+    box-shadow: 0 0 20px rgba(0, 123, 255, 0.3);
+    transform: scale(1.05);
 }
 
 #button-container {
@@ -69,7 +83,52 @@ body {
 button {
     font-family: 'Cabin';
     border: none;
-    padding: 1%;
-    margin: 1%;
+    padding: 15px;
+    margin: 10px;
     border-radius: 7px;
+    background-color: #0077b6;
+    color: white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    background-color: #005f8f;
+    transform: scale(1.05);
+}
+
+/* Hover effect for stats-container */
+.stats-container:hover {
+    cursor: pointer; /* Change cursor to pointer on hover */
+    box-shadow: 0 0 30px lightblue; /* Box shadow effect on hover */
+}
+
+@media screen and (max-width: 768px) {
+    .stats-container {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .stats-card {
+        width: 100%;
+    }
+
+    #games-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .game-card {
+        width: 80%;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+    }
+}
+
+html {
+    scroll-behavior: smooth;
 }
