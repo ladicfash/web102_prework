@@ -1,5 +1,4 @@
-// Image credits: Kickstarter
-const games = ` [
+const GAMES_JSON = [
   {
     "name": "Heroes Of Mythic Americas",
     "description": "An exciting 5e RPG supplement that heroically represents pre-Columbian American cultures and mythologies",
@@ -88,17 +87,64 @@ const games = ` [
     "backers": 9264,
     "img": "./assets/kingdom_death.png"
   }
-]
-`
-const template = `
-{
-"name": "",
-"description": "",
-"pledged": 0,
-"goal": 0,
-"backers": 0,
-"img": ""
-},
-`
+];
 
-export default games;
+function updateStats() {
+  const statsData = {
+    totalContributions: 1234,
+    totalRaised: 567890,
+    totalGames: GAMES_JSON.length,
+    topGames: [GAMES_JSON[2], GAMES_JSON[1]]  // Top funded games, for example
+  };
+
+  // Update stats dynamically
+  document.getElementById("num-contributions").innerText = statsData.totalContributions.toLocaleString();
+  document.getElementById("total-raised").innerText = `$${statsData.totalRaised.toLocaleString()}`;
+  document.getElementById("num-games").innerText = statsData.totalGames;
+
+  // Update top funded games
+  document.getElementById("first-game").querySelector("p").innerText = `${statsData.topGames[0].name} - $${statsData.topGames[0].pledged.toLocaleString()}`;
+  document.getElementById("second-game").querySelector("p").innerText = `${statsData.topGames[1].name} - $${statsData.topGames[1].pledged.toLocaleString()}`;
+}
+
+function addGamesToPage(games) {
+  const gamesContainer = document.getElementById("games-container");
+  gamesContainer.innerHTML = ''; // Clear any existing content
+
+  games.forEach(game => {
+    const gameCard = document.createElement("div");
+    gameCard.classList.add("game-card");
+
+    gameCard.innerHTML = `
+      <img class="game-img" src="${game.img}" alt="${game.name}">
+      <h3>${game.name}</h3>
+      <p>${game.description}</p>
+      <p><strong>Pledged:</strong> $${game.pledged.toLocaleString()}</p>
+      <p><strong>Goal:</strong> $${game.goal.toLocaleString()}</p>
+      <p><strong>Backers:</strong> ${game.backers.toLocaleString()}</p>
+    `;
+
+    gamesContainer.appendChild(gameCard);
+  });
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  // Update the stats and game display
+  updateStats();
+  addGamesToPage(GAMES_JSON);
+
+  // Button functionality for filtering games
+  document.getElementById("unfunded-btn").addEventListener("click", () => {
+    const unfundedGames = GAMES_JSON.filter(game => game.pledged < game.goal);
+    addGamesToPage(unfundedGames);
+  });
+
+  document.getElementById("funded-btn").addEventListener("click", () => {
+    const fundedGames = GAMES_JSON.filter(game => game.pledged >= game.goal);
+    addGamesToPage(fundedGames);
+  });
+
+  document.getElementById("all-btn").addEventListener("click", () => {
+    addGamesToPage(GAMES_JSON);
+  });
+});
