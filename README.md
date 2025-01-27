@@ -24,7 +24,7 @@ The following **optional** features are implemented:
 Here's a walkthrough of implemented features:
 
 <img src='[http://i.imgur.com/link/to/your/gif/file.gif](https://imgur.com/a/I4eV5vI)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-
+link if not working: https://imgur.com/a/I4eV5vI
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  screeenpal
 <!-- Recommended tools:
