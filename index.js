@@ -1,14 +1,14 @@
-/*****************************************************************************
- * Challenge 2: Review the provided code. The provided code includes:
- * -> Statements that import data from games.js
- * -> A function that deletes all child elements from a parent element in the DOM
-*/
-
 // import the JSON data about the crowd funded games from the games.js file
 import GAMES_DATA from './games.js';
 
 // create a list of objects to store the data about the games using JSON.parse
-const GAMES_JSON = JSON.parse(GAMES_DATA);
+let GAMES_JSON;
+try {
+    GAMES_JSON = JSON.parse(GAMES_DATA);
+} catch (error) {
+    console.error('Error parsing JSON data:', error);
+    GAMES_JSON = [];
+}
 
 // remove all child elements from a parent element in the DOM
 function deleteChildElements(parent) {
@@ -17,15 +17,11 @@ function deleteChildElements(parent) {
     }
 }
 
-/*****************************************************************************
- * Challenge 3: Add data about each game as a card to the games-container
- * Skills used: DOM manipulation, for loops, template literals, functions
-*/
-
 const gamesContainer = document.getElementById("games-container");
 
 // function to add all data from the games array to the page
 function addGamesToPage(games) {
+    const fragment = document.createDocumentFragment();
     games.forEach(game => {
         const gameCard = document.createElement("div");
         gameCard.classList.add("game-card");
@@ -39,8 +35,9 @@ function addGamesToPage(games) {
             <p><strong>Backers: </strong>${game.backers.toLocaleString()}</p>
         `;
 
-        gamesContainer.appendChild(gameCard);
+        fragment.appendChild(gameCard);
     });
+    gamesContainer.appendChild(fragment);
 }
 
 // Call the function to display all games
@@ -114,7 +111,7 @@ descriptionContainer.appendChild(descriptionElement);
 const firstGameContainer = document.getElementById("first-game");
 const secondGameContainer = document.getElementById("second-game");
 
-const sortedGames =  GAMES_JSON.sort((item1, item2) => item2.pledged - item1.pledged);
+const sortedGames = [...GAMES_JSON].sort((item1, item2) => item2.pledged - item1.pledged);
 const [firstGame, secondGame] = sortedGames;
 
 const firstGameElement = document.createElement("h3");
@@ -138,6 +135,7 @@ function fetchKickstarterGames() {
     fetch('/path/to/kickstarter-games.json')
         .then(response => response.json())
         .then(kickstarterGames => {
+            const fragment = document.createDocumentFragment();
             kickstarterGames.forEach(game => {
                 const gameCard = document.createElement("div");
                 gameCard.classList.add("game-card");
@@ -151,8 +149,9 @@ function fetchKickstarterGames() {
                     <p><strong>Backers: </strong>${game.backers.toLocaleString()}</p>
                 `;
 
-                kickstarterContainer.appendChild(gameCard);
+                fragment.appendChild(gameCard);
             });
+            kickstarterContainer.appendChild(fragment);
         })
         .catch(error => {
             console.error('Error fetching Kickstarter games:', error);
@@ -161,3 +160,13 @@ function fetchKickstarterGames() {
 
 fetchKickstarterGames();
 
+/*****************************************************************************
+ * Challenge 8: Display a summary text
+ * Skills used: template literals, string interpolation
+*/
+
+const numOfGames = GAMES_JSON.length;
+const unfundedGamesCount = GAMES_JSON.filter(game => game.pledged < game.goal).length;
+const unfundedGamesText = `A total of $${totalRaised.toLocaleString()} has been raised for ${numOfGames} games. Currently, ${unfundedGamesCount} game${unfundedGamesCount > 1 ? 's remain' : ' remains'} unfunded. We need your help to fund these amazing games!`;
+
+console.log(unfundedGamesText);
