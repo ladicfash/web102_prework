@@ -4,7 +4,7 @@ Submitted by: **Oladipupo Fashogbon**
 
 **Name of your app** is a website for the company Sea Monster Crowdfunding that displays information about the games they have funded.
 
-Time spent: **X** hours spent in total
+Time spent: **32** hours spent in total
 
 ## Required Features
 
@@ -23,8 +23,8 @@ The following **optional** features are implemented:
 
 Here's a walkthrough of implemented features:
 
-<img src='[http://i.imgur.com/link/to/your/gif/file.gif](https://imgur.com/a/I4eV5vI)' title='Video Walkthrough' width='' alt='Video Walkthrough' />
-link if not working: https://imgur.com/a/I4eV5vI
+<blockquote class="imgur-embed-pub" lang="en" data-id="a/IBJV33I" data-context="false" ><a href="//imgur.com/a/IBJV33I"></a></blockquote><script async src="//s.imgur.com/min/embed.js" charset="utf-8"></script>
+link if not working: (https://imgur.com/a/IBJV33I)
 <!-- Replace this with whatever GIF tool you used! -->
 GIF created with ...  screeenpal
 <!-- Recommended tools:
