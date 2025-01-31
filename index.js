@@ -1,11 +1,22 @@
 import GAMES_JSON from './games.js';
 
+/*****************************************************************************
+ * Challenge 2: Review the provided code. The provided code includes:
+ * -> Statements that import data from games.js
+ * -> A function that deletes all child elements from a parent element in the DOM
+*/
+
 // Function to remove all child elements from a parent element in the DOM
 function deleteChildElements(parent) {
     while (parent.firstChild) {
         parent.removeChild(parent.firstChild);
     }
 }
+
+/*****************************************************************************
+ * Challenge 3: Add data about each game as a card to the games-container
+ * Skills used: DOM manipulation, for loops, template literals, functions
+*/
 
 // Reference to the games container element in the DOM
 const gamesContainer = document.getElementById("games-container");
@@ -35,6 +46,12 @@ function addGamesToPage(games) {
 // Call the function to display all games on the page
 addGamesToPage(GAMES_JSON);
 
+/*****************************************************************************
+ * Challenge 4: Create the summary statistics at the top of the page
+ * displaying the total number of contributions, amount donated, and number of games on the site.
+ * Skills used: arrow functions, reduce, template literals
+*/
+
 // References to the summary statistic elements in the DOM
 const contributionsCard = document.getElementById("num-contributions");
 const raisedCard = document.getElementById("total-raised");
@@ -51,6 +68,11 @@ raisedCard.innerHTML = `$${totalRaised.toLocaleString()}`;
 // Get the total number of games
 const totalGames = GAMES_JSON.length;
 gamesCard.innerHTML = totalGames.toLocaleString();
+
+/*****************************************************************************
+ * Challenge 5: Add functions to filter the funded and unfunded games
+ * Skills used: functions, filter
+*/
 
 // Function to filter and display only unfunded games
 function filterUnfundedOnly() {
@@ -82,6 +104,11 @@ unfundedBtn.addEventListener("click", filterUnfundedOnly);
 fundedBtn.addEventListener("click", filterFundedOnly);
 allBtn.addEventListener("click", showAllGames);
 
+/*****************************************************************************
+ * Challenge 6: Add more information about the company
+ * Skills used: template literals, ternary operator
+*/
+
 // Reference to the description container element in the DOM
 const descriptionContainer = document.getElementById("description-container");
 
@@ -95,6 +122,11 @@ const displayStr = `A total of $${totalRaised.toLocaleString()} has been raised 
 const paragraph = document.createElement("p");
 paragraph.innerHTML = displayStr;
 descriptionContainer.appendChild(paragraph);
+
+/*****************************************************************************
+ * Challenge 7: Select & display the top 2 games
+ * Skills used: spread operator, destructuring, template literals, sort
+*/
 
 // References to the top game containers in the DOM
 const firstGameContainer = document.getElementById("first-game");
